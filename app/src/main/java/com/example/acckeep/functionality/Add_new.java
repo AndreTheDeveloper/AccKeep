@@ -1,14 +1,18 @@
-package com.example.acckeep;
+package com.example.acckeep.functionality;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.acckeep.R;
+import com.example.acckeep.objects.Application;
+import com.example.acckeep.objects.Credentials;
+import com.example.acckeep.objects.Website;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.FileInputStream;
@@ -17,7 +21,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class Add_new extends AppCompatActivity {
     private ArrayList<Credentials> allObjects = new ArrayList<>();
@@ -53,12 +56,24 @@ public class Add_new extends AppCompatActivity {
 
         if(app.length() > 0 && usr.length() > 0 && pass.length() > 0) {
             allObjects = load();
-            Credentials cred = new Credentials(app, usr, pass);
-           if(validation(cred)) {
-               allObjects.add(cred);
-               save(allObjects);
-               Toast.makeText(this, "Account added successfully", Toast.LENGTH_LONG).show();
-           }
+            Switch sw = (Switch) findViewById(R.id.switch1);
+            if(sw.isChecked()) {
+                Application ap = new Application(app,usr,pass);
+                if(appValidation(ap)) {
+                    allObjects.add(ap);
+                    save(allObjects);
+                    Toast.makeText(this, "Account added successfully", Toast.LENGTH_LONG).show();
+                }
+            }
+            else {
+                Website web = new Website(app,usr,pass);
+                if(webValidation(web)) {
+                    allObjects.add(web);
+                    save(allObjects);
+                    Toast.makeText(this, "Account added successfully", Toast.LENGTH_LONG).show();
+                }
+            }
+
             finish();
         }
         else {
@@ -97,14 +112,33 @@ public class Add_new extends AppCompatActivity {
         }
     }
 
-    private Boolean validation(Credentials cred) {
+    private Boolean webValidation(Website web) {
         for(int i = 0; i < allObjects.size(); i++) {
-            if(allObjects.get(i).getUsername().equalsIgnoreCase(cred.getUsername()) &&
-                    allObjects.get(i).getWebsite().equalsIgnoreCase(cred.getWebsite()) &&
-                    allObjects.get(i).getPassword().equalsIgnoreCase(cred.getPassword())) {
-                Toast.makeText(this, "That Account Is Already Stored", Toast.LENGTH_SHORT).show();
-                return false;
+            if(allObjects.get(i) instanceof Website) {
+                Website current = (Website) allObjects.get(i);
+                if(current.getUsername().equalsIgnoreCase(web.getUsername()) &&
+                        current.getWebsite().equalsIgnoreCase(web.getWebsite()) &&
+                        current.getPassword().equalsIgnoreCase(web.getPassword())) {
+                    Toast.makeText(this, "That Account Is Already Stored", Toast.LENGTH_SHORT).show();
+                    return false;
+                }
             }
+        }
+        return true;
+    }
+
+    private Boolean appValidation(Application app) {
+        for(int i = 0; i < allObjects.size(); i++) {
+            if(allObjects.get(i) instanceof Application) {
+                Application current = (Application) allObjects.get(i);
+                if(current.getUsername().equalsIgnoreCase(app.getUsername()) &&
+                        current.getApp().equalsIgnoreCase(app.getApp()) &&
+                        current.getPassword().equalsIgnoreCase(app.getPassword())) {
+                    Toast.makeText(this, "That Account Is Already Stored", Toast.LENGTH_SHORT).show();
+                    return false;
+                }
+            }
+
         }
         return true;
     }

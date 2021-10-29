@@ -1,4 +1,4 @@
-package com.example.acckeep;
+package com.example.acckeep.functionality;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -9,6 +9,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.acckeep.R;
 
 import java.io.File;
 import java.io.FileOutputStream;

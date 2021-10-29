@@ -1,4 +1,4 @@
-package com.example.acckeep;
+package com.example.acckeep.customlist;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,25 +6,23 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 
+import com.example.acckeep.R;
+import com.example.acckeep.functionality.Add_new;
+//import com.example.acckeep.functionality.Edit_Program;
+//import com.example.acckeep.functionality.Search;
+import com.example.acckeep.objects.Credentials;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -53,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         searchBttn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openSearchActivity();
+                //openSearchActivity();
             }
         });
     }
@@ -78,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 object = allObjects.get(position);
-                openEditActivity(object);
+                //openEditActivity(object);
             }
         });
     }
@@ -88,16 +86,16 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void openEditActivity(Credentials edit) {
-        Intent intent = new Intent(this,Edit_Program.class);
-        intent.putExtra("Object", edit);
-        startActivity(intent);
-    }
+//    public void openEditActivity(Credentials edit) {
+//        Intent intent = new Intent(this, Edit_Program.class);
+//        intent.putExtra("Object", edit);
+//        startActivity(intent);
+//    }
 
-    public void openSearchActivity() {
-        Intent intent = new Intent(this, Search.class);
-        startActivity(intent);
-    }
+//    public void openSearchActivity() {
+//        Intent intent = new Intent(this, Search.class);
+//        startActivity(intent);
+//    }
 
     private ArrayList<Credentials> load(){
         allObjects.clear();

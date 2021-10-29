@@ -1,24 +1,14 @@
-package com.example.acckeep;
+package com.example.acckeep.objects;
 
 import java.io.Serializable;
 
 public class Credentials implements Serializable {
-    private String website;
     private String password;
     private String username;
 
-    public Credentials(String website, String username, String password) {
-        this.website = website;
+    public Credentials(String username, String password) {
         this.password = password;
         this.username = username;
-    }
-
-    public String getWebsite() {
-        return website;
-    }
-
-    public void setWebsite(String website) {
-        this.website = website;
     }
 
     public String getPassword() {
@@ -37,8 +27,4 @@ public class Credentials implements Serializable {
         this.username = username;
     }
 
-    public String toString() {
-        return "\nWebsite/Application: " + this.website + "\nUsername: " + this.username +
-                "\nPassword: " + this.password + "\n";
-    }
 }

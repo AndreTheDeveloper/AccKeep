@@ -7,15 +7,15 @@
         android:label="Secure Account Manager"
         android:allowBackup="true">
     <activity
-        android:parentActivityName=".MainActivity"
-        android:name=".Add_new"/>
+        android:parentActivityName=".customlist.MainActivity"
+        android:name=".functionality.Add_new"/>
     <activity
-        android:parentActivityName=".MainActivity"
-        android:name=".Edit_Program"/>
+        android:parentActivityName=".customlist.MainActivity"
+        android:name=".functionality.Edit_Program"/>
     <activity
-        android:parentActivityName=".MainActivity"
-        android:name=".CreatePassword"/>
-    <activity android:name=".Login"
+        android:parentActivityName=".customlist.MainActivity"
+        android:name=".functionality.CreatePassword"/>
+    <activity android:name=".functionality.Login"
         android:exported="true">
     <intent-filter>
     <action
@@ -25,10 +25,10 @@
     </intent-filter>
     </activity>
     <activity
-        android:name=".Search">
+        android:name=".functionality.Search">
     </activity>
     <activity
-        android:name=".MainActivity">
+        android:name=".customlist.MainActivity">
     </activity>
     </application>
 </manifest>

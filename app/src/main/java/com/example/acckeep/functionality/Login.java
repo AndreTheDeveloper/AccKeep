@@ -1,4 +1,4 @@
-package com.example.acckeep;
+package com.example.acckeep.functionality;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,9 +6,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.acckeep.customlist.MainActivity;
+import com.example.acckeep.R;
 
 import java.io.FileInputStream;
 import java.io.IOException;
