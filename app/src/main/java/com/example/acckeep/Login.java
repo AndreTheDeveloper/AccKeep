@@ -48,10 +48,13 @@ public class Login extends AppCompatActivity {
     }
 
     public void onResume() {
+        guess = "";
+        guessedPass = (TextView) findViewById(R.id.createdPass);
+        guessedPass.setText("");
         super.onResume();
     }
 
-    public void guessedNum(View v){
+    public void guessedNum(View v) {
         guess += ((Button) v).getText().toString();
         setText();
     }
