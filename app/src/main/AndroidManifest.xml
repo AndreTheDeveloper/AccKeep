@@ -13,7 +13,7 @@
         android:parentActivityName=".MainActivity"
         android:name=".Edit_Program"/>
     <activity
-        android:parentActivityName=".Login"
+        android:parentActivityName=".MainActivity"
         android:name=".CreatePassword"/>
     <activity android:name=".Login"
         android:exported="true">

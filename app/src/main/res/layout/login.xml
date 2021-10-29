@@ -39,47 +39,28 @@
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
         android:text="Login"
         android:textSize="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.047" />
 
     <TextView
-        android:id="@+id/guessedPass"
+        android:id="@+id/createdPass"
         android:layout_width="115dp"
         android:layout_height="50dp"
         android:layout_marginTop="36dp"
         android:password="true"
         android:textAlignment="center"
         android:textSize="50dp"
-        app:layout_constraintEnd_toStartOf="@+id/loginBttn"
-        app:layout_constraintStart_toEndOf="@+id/createBttn"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
-
-    <Button
-        android:id="@+id/loginBttn"
-        android:layout_width="115dp"
-        android:layout_height="37dp"
-        android:layout_marginTop="108dp"
-        android:background="#008577"
-        android:text="Submit"
-        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/createBttn"
-        android:layout_width="115dp"
-        android:layout_height="37dp"
-        android:layout_marginTop="108dp"
-        android:background="#008577"
-        android:enabled="true"
-        android:text="Create"
-        android:textColor="#FFFFFF"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView7"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/num5"
