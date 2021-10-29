@@ -69,8 +69,6 @@ public class Login extends AppCompatActivity {
         if(guess.length() > 0) {
             guess = guess.substring(0, guess.length() - 1);
             setText();
-        } else {
-            Toast.makeText(this, "Password field is empty", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -81,7 +79,4 @@ public class Login extends AppCompatActivity {
         }
     }
 
-    public void errorMsg() {
-        Toast.makeText(this, "Password already set", Toast.LENGTH_SHORT).show();
-    }
 }

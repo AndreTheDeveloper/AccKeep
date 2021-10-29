@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class Add_new extends AppCompatActivity {
     private ArrayList<Credentials> allObjects = new ArrayList<>();
@@ -56,12 +57,12 @@ public class Add_new extends AppCompatActivity {
            if(validation(cred)) {
                allObjects.add(cred);
                save(allObjects);
-               Toast.makeText(this, "Credentials added successfully", Toast.LENGTH_LONG).show();
+               Toast.makeText(this, "Account added successfully", Toast.LENGTH_LONG).show();
            }
             finish();
         }
         else {
-            Toast.makeText(this, "One or more fields are empty", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "One or more fields are empty", Toast.LENGTH_SHORT).show();
         }
     }
     private ArrayList<Credentials> load(){
@@ -92,16 +93,16 @@ public class Add_new extends AppCompatActivity {
                 this.out.writeObject(allObjects.get(i));
             }
         } catch(Exception e) {
-            Toast.makeText(this, "Error saving", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Error saving", Toast.LENGTH_SHORT).show();
         }
     }
 
     private Boolean validation(Credentials cred) {
         for(int i = 0; i < allObjects.size(); i++) {
-            if(allObjects.get(i).getUsername().equals(cred.getUsername()) &&
-                    allObjects.get(i).getWebsite().equals(cred.getWebsite()) &&
-                    allObjects.get(i).getPassword().equals(cred.getPassword())) {
-                Toast.makeText(this, "Account info already saved", Toast.LENGTH_LONG).show();
+            if(allObjects.get(i).getUsername().equalsIgnoreCase(cred.getUsername()) &&
+                    allObjects.get(i).getWebsite().equalsIgnoreCase(cred.getWebsite()) &&
+                    allObjects.get(i).getPassword().equalsIgnoreCase(cred.getPassword())) {
+                Toast.makeText(this, "That Account Is Already Stored", Toast.LENGTH_SHORT).show();
                 return false;
             }
         }
