@@ -69,16 +69,9 @@ public class MainActivity extends AppCompatActivity {
     public void createList() {
         allObjects = load();
         listView = (ListView)findViewById(R.id.ListView);
-        ArrayAdapter<Credentials> adapter = new ArrayAdapter<Credentials>(MainActivity.this, android.R.layout.simple_list_item_1,allObjects);
+
+        MyAdapter adapter = new MyAdapter(this, R.layout.row, allObjects);
         listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
-        {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                object = allObjects.get(position);
-                //openEditActivity(object);
-            }
-        });
     }
 
     public void openAddActivity() {

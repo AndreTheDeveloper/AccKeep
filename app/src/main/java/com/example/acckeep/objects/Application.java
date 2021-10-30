@@ -5,8 +5,8 @@ import java.io.Serializable;
 public class Application extends Credentials implements Serializable {
     private String app;
 
-    public Application(String app, String username, String password) {
-        super(username, password);
+    public Application(String app, int image, String username, String password) {
+        super(image,username, password);
         this.app = app;
     }
 
@@ -19,7 +19,7 @@ public class Application extends Credentials implements Serializable {
     }
 
     public String toString() {
-        return "\nApplication: " + this.app + "\nUsername: " + getUsername() +
+        return "Application: " + this.app + "\nUsername: " + getUsername() +
                 "\nPassword: " + getPassword() + "\n";
     }
 }

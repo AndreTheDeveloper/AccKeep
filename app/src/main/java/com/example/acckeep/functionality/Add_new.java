@@ -58,19 +58,19 @@ public class Add_new extends AppCompatActivity {
             allObjects = load();
             Switch sw = (Switch) findViewById(R.id.switch1);
             if(sw.isChecked()) {
-                Application ap = new Application(app,usr,pass);
+                Application ap = new Application(app,R.drawable.appicon,usr,pass);
                 if(appValidation(ap)) {
                     allObjects.add(ap);
                     save(allObjects);
-                    Toast.makeText(this, "Account added successfully", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "Account added successfully", Toast.LENGTH_SHORT).show();
                 }
             }
             else {
-                Website web = new Website(app,usr,pass);
+                Website web = new Website(app,R.drawable.websiteicon,usr,pass);
                 if(webValidation(web)) {
                     allObjects.add(web);
                     save(allObjects);
-                    Toast.makeText(this, "Account added successfully", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "Account added successfully", Toast.LENGTH_SHORT).show();
                 }
             }
 

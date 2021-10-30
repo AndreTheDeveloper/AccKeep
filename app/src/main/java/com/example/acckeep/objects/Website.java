@@ -5,8 +5,8 @@ import java.io.Serializable;
 public class Website extends Credentials implements Serializable {
     private String website;
 
-    public Website(String website, String username, String password) {
-        super(username, password);
+    public Website(String website, int image, String username, String password) {
+        super(image,username, password);
         this.website = website;
     }
 
@@ -19,7 +19,7 @@ public class Website extends Credentials implements Serializable {
     }
 
     public String toString() {
-        return "\nWebsite " + this.website + "\nUsername: " + getUsername() +
+        return "Website: " + this.website + "\nUsername: " + getUsername() +
                 "\nPassword: " + getPassword() + "\n";
     }
 }
