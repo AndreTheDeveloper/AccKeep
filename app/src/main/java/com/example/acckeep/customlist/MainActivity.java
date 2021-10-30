@@ -6,14 +6,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 
 import com.example.acckeep.R;
@@ -21,8 +17,9 @@ import com.example.acckeep.functionality.Add_new;
 //import com.example.acckeep.functionality.Edit_Program;
 //import com.example.acckeep.functionality.Search;
 import com.example.acckeep.functionality.Edit_Program;
+import com.example.acckeep.functionality.Search;
 import com.example.acckeep.objects.Application;
-import com.example.acckeep.objects.Credentials;
+import com.example.acckeep.objects.Account;
 import com.example.acckeep.objects.Website;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -33,9 +30,9 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ArrayList<Credentials> allObjects = new ArrayList<>();
-    private ArrayList<Credentials> searchCred = new ArrayList<>();
-    private Credentials object;
+    private ArrayList<Account> allObjects = new ArrayList<>();
+    private ArrayList<Account> searchCred = new ArrayList<>();
+    private Account object;
     private FileInputStream fileIn;
     private ObjectInputStream in;
     private ListView listView;
@@ -57,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         searchBttn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //openSearchActivity();
+                openSearchActivity();
             }
         });
     }
@@ -86,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
                     Website edit = (Website) listView.getItemAtPosition(position);
                     openEditActivity(edit);
                 }
-                else {
+                else if (listView.getItemAtPosition(position) instanceof Application){
                     Application edit = (Application) listView.getItemAtPosition(position);
                     openEditActivity(edit);
                 }
@@ -100,18 +97,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void openEditActivity(Credentials edit) {
+    public void openEditActivity(Account edit) {
         Intent intent = new Intent(this, Edit_Program.class);
         intent.putExtra("Object", edit);
         startActivity(intent);
     }
 
-//    public void openSearchActivity() {
-//        Intent intent = new Intent(this, Search.class);
-//        startActivity(intent);
-//    }
+    public void openSearchActivity() {
+        Intent intent = new Intent(this, Search.class);
+        startActivity(intent);
+    }
 
-    private ArrayList<Credentials> load(){
+    private ArrayList<Account> load(){
         allObjects.clear();
         boolean loop = true;
         Context context = this;
@@ -119,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
             fileIn =  context.openFileInput("saved.ser");
             in = new ObjectInputStream(fileIn);
             while(loop) {
-                object = (Credentials) in.readObject();
+                object = (Account) in.readObject();
                 if(object != null) {
                     allObjects.add(object);
                 } else {

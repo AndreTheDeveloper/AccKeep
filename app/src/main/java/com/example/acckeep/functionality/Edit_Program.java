@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -16,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.acckeep.customlist.MainActivity;
 import com.example.acckeep.R;
 import com.example.acckeep.objects.Application;
-import com.example.acckeep.objects.Credentials;
+import com.example.acckeep.objects.Account;
 import com.example.acckeep.objects.Website;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -28,13 +27,12 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 public class Edit_Program extends AppCompatActivity {
-
     private FileOutputStream fileOut;
     private ObjectOutputStream out;
     private FileInputStream fileIn;
     private ObjectInputStream in;
-    private ArrayList<Credentials> allObjects = new ArrayList<>();
-    private Credentials object;
+    private ArrayList<Account> allObjects = new ArrayList<>();
+    private Account object;
     private Website website;
     private Application app;
     private Intent intent;
@@ -42,7 +40,7 @@ public class Edit_Program extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.edit);;
+        setContentView(R.layout.edit);
     }
     public void onStart() {
         load();
@@ -52,21 +50,33 @@ public class Edit_Program extends AppCompatActivity {
     private void editView() {
         intent = getIntent();
         if(intent.getSerializableExtra("Object") instanceof Website) {
+            TextView title = (TextView) findViewById(R.id.textView2);
+            title.setText("Website");
+
             website = (Website) intent.getSerializableExtra("Object");
             setContentView(R.layout.edit);
+
             EditText editApp = (EditText) findViewById(R.id.editApplication);
             editApp.setText(website.getWebsite());
+
             EditText editUsr = (EditText) findViewById(R.id.editUsername);
             editUsr.setText(website.getUsername());
+
             EditText editPass = (EditText) findViewById(R.id.editPassword);
             editPass.setText(website.getPassword());
-        } else {
+        } else if(intent.getSerializableExtra("Object") instanceof Application){
+            TextView title = (TextView) findViewById(R.id.textView2);
+            title.setText("Application");
+
             app = (Application) intent.getSerializableExtra("Object");
             setContentView(R.layout.edit);
+
             EditText editApp = (EditText) findViewById(R.id.editApplication);
             editApp.setText(app.getApp());
+
             EditText editUsr = (EditText) findViewById(R.id.editUsername);
             editUsr.setText(app.getUsername());
+
             EditText editPass = (EditText) findViewById(R.id.editPassword);
             editPass.setText(app.getPassword());
         }
@@ -84,7 +94,7 @@ public class Edit_Program extends AppCompatActivity {
         finish();
     }
 
-    private void saveToFile(ArrayList<Credentials> allObjects) {
+    private void saveToFile(ArrayList<Account> allObjects) {
         Context context = this;
         try{
             fileOut = context.openFileOutput("saved.ser", Context.MODE_PRIVATE);
@@ -181,7 +191,7 @@ public class Edit_Program extends AppCompatActivity {
                 .setNegativeButton(android.R.string.no, null).show();
     }
 
-    private ArrayList<Credentials> load(){
+    private ArrayList<Account> load(){
         allObjects.clear();
         boolean loop = true;
         Context context = this;
@@ -189,7 +199,7 @@ public class Edit_Program extends AppCompatActivity {
             fileIn =  context.openFileInput("saved.ser");
             in = new ObjectInputStream(fileIn);
             while(loop) {
-                object = (Credentials) in.readObject();
+                object = (Account) in.readObject();
                 if(object != null) {
                     allObjects.add(object);
                 } else {

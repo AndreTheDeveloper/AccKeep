@@ -2,12 +2,12 @@ package com.example.acckeep.objects;
 
 import java.io.Serializable;
 
-public class Credentials implements Serializable {
+public class Account implements Serializable {
     private int image;
     private String password;
     private String username;
 
-    public Credentials(int image, String username, String password) {
+    public Account(int image, String username, String password) {
         this.image = image;
         this.password = password;
         this.username = username;

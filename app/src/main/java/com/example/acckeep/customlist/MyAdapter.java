@@ -13,15 +13,15 @@ import com.example.acckeep.R;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.acckeep.objects.Credentials;
+import com.example.acckeep.objects.Account;
 
 import java.util.ArrayList;
 
-public class MyAdapter extends ArrayAdapter<Credentials> {
+public class MyAdapter extends ArrayAdapter<Account> {
     private Context mContext;
     private int mResource;
 
-    public MyAdapter(@NonNull Context context, int resource, @NonNull ArrayList<Credentials> objects) {
+    public MyAdapter(@NonNull Context context, int resource, @NonNull ArrayList<Account> objects) {
         super(context, resource, objects);
         this.mContext = context;
         this.mResource = resource;

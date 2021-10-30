@@ -11,10 +11,11 @@ import android.widget.Toast;
 
 import com.example.acckeep.R;
 import com.example.acckeep.objects.Application;
-import com.example.acckeep.objects.Credentials;
+import com.example.acckeep.objects.Account;
 import com.example.acckeep.objects.Website;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -23,12 +24,12 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 public class Add_new extends AppCompatActivity {
-    private ArrayList<Credentials> allObjects = new ArrayList<>();
+    private ArrayList<Account> allObjects = new ArrayList<>();
     private FileOutputStream fileOut;
     private ObjectOutputStream out;
     private FileInputStream fileIn;
     private ObjectInputStream in;
-    private Credentials object;
+    private Account object;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,15 +81,16 @@ public class Add_new extends AppCompatActivity {
             Toast.makeText(this, "One or more fields are empty", Toast.LENGTH_SHORT).show();
         }
     }
-    private ArrayList<Credentials> load(){
+    private ArrayList<Account> load(){
         allObjects.clear();
         boolean loop = true;
         Context context = this;
         try{
             fileIn =  context.openFileInput("saved.ser");
+
             in = new ObjectInputStream(fileIn);
             while(loop) {
-                object = (Credentials) in.readObject();
+                object = (Account) in.readObject();
                 if(object != null) {
                     allObjects.add(object);
                 } else {
@@ -99,7 +101,7 @@ public class Add_new extends AppCompatActivity {
         return allObjects;
     }
 
-    private void save(ArrayList<Credentials> allObjects) {
+    private void save(ArrayList<Account> allObjects) {
         Context context = this;
         try{
             fileOut = context.openFileOutput("saved.ser", Context.MODE_PRIVATE);

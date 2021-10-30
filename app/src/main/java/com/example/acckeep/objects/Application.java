@@ -2,7 +2,7 @@ package com.example.acckeep.objects;
 
 import java.io.Serializable;
 
-public class Application extends Credentials implements Serializable {
+public class Application extends Account implements Serializable {
     private String app;
 
     public Application(String app, int image, String username, String password) {
