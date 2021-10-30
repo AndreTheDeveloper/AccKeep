@@ -34,9 +34,9 @@ public class Edit_Program extends AppCompatActivity {
     private FileInputStream fileIn;
     private ObjectInputStream in;
     private ArrayList<Credentials> allObjects = new ArrayList<>();
+    private Credentials object;
     private Website website;
     private Application app;
-    private Credentials object;
     private Intent intent;
 
     @Override
@@ -147,26 +147,39 @@ public class Edit_Program extends AppCompatActivity {
         }
     }
 
-//    public void delete(View v) {
-//        new AlertDialog.Builder(this)
-//                .setTitle("Confirm delete")
-//                .setMessage("Do you really want to delete?")
-//                .setIcon(android.R.drawable.ic_dialog_alert)
-//                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-//
-//                    public void onClick(DialogInterface dialog, int whichButton) {
-//                        for(int i = 0; i < allObjects.size(); i++){
-//                            if(allObjects.get(i).getUsername().equals(object.getUsername()) &&
-//                                    allObjects.get(i).getWebsite().equals(object.getWebsite()) &&
-//                                    allObjects.get(i).getPassword().equals(object.getPassword())) {
-//                                allObjects.remove(i);
-//                                finish();
-//                            }
-//                        }
-//                        save(allObjects);
-//                    }})
-//                .setNegativeButton(android.R.string.no, null).show();
-//    }
+    public void delete(View v) {
+        new AlertDialog.Builder(this)
+                .setTitle("Confirm delete")
+                .setMessage("Do you really want to delete?")
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        for(int i = 0; i < allObjects.size(); i++){
+                            if(allObjects.get(i) instanceof Website && intent.getSerializableExtra("Object") instanceof Website) {
+                                Website current = (Website) allObjects.get(i);
+                                Website website = (Website) intent.getSerializableExtra("Object");
+                                if(current.getUsername().equals(website.getUsername()) &&
+                                        current.getWebsite().equals(website.getWebsite()) &&
+                                        current.getPassword().equals(website.getPassword())) {
+                                    allObjects.remove(i);
+                                    finish();
+                                }
+                            } else if(allObjects.get(i) instanceof Application && intent.getSerializableExtra("Object") instanceof Application) {
+                                Application current = (Application) allObjects.get(i);
+                                Application app = (Application) intent.getSerializableExtra("Object");
+                                if(current.getUsername().equals(app.getUsername()) &&
+                                        current.getApp().equals(app.getApp()) &&
+                                        current.getPassword().equals(app.getPassword())) {
+                                    allObjects.remove(i);
+                                    finish();
+                                }
+                            }
+                        }
+                        saveToFile(allObjects);
+                    }})
+                .setNegativeButton(android.R.string.no, null).show();
+    }
 
     private ArrayList<Credentials> load(){
         allObjects.clear();
