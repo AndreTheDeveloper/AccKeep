@@ -20,6 +20,6 @@ public class Application extends Credentials implements Serializable {
 
     public String toString() {
         return "Application: " + this.app + "\nUsername: " + getUsername() +
-                "\nPassword: " + getPassword() + "\n";
+                "\nPassword: " + getPassword();
     }
 }

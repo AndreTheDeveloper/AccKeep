@@ -6,18 +6,23 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 
 import com.example.acckeep.R;
 import com.example.acckeep.functionality.Add_new;
 //import com.example.acckeep.functionality.Edit_Program;
 //import com.example.acckeep.functionality.Search;
+import com.example.acckeep.objects.Application;
 import com.example.acckeep.objects.Credentials;
+import com.example.acckeep.objects.Website;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.FileInputStream;
@@ -72,12 +77,27 @@ public class MainActivity extends AppCompatActivity {
 
         MyAdapter adapter = new MyAdapter(this, R.layout.row, allObjects);
         listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if(listView.getItemAtPosition(position) instanceof Website) {
+                    Website edit = (Website) listView.getItemAtPosition(position);
+                    Log.i("clicked", edit.toString());
+                }
+                else {
+                    Application edit = (Application) listView.getItemAtPosition(position);
+                    Log.i("clicked", edit.toString());
+                }
+            }
+        });
     }
 
     public void openAddActivity() {
         Intent intent = new Intent(this, Add_new.class);
         startActivity(intent);
     }
+
 
 //    public void openEditActivity(Credentials edit) {
 //        Intent intent = new Intent(this, Edit_Program.class);

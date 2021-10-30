@@ -20,6 +20,6 @@ public class Website extends Credentials implements Serializable {
 
     public String toString() {
         return "Website: " + this.website + "\nUsername: " + getUsername() +
-                "\nPassword: " + getPassword() + "\n";
+                "\nPassword: " + getPassword();
     }
 }
