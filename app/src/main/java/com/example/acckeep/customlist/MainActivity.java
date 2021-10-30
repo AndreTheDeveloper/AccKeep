@@ -20,6 +20,7 @@ import com.example.acckeep.R;
 import com.example.acckeep.functionality.Add_new;
 //import com.example.acckeep.functionality.Edit_Program;
 //import com.example.acckeep.functionality.Search;
+import com.example.acckeep.functionality.Edit_Program;
 import com.example.acckeep.objects.Application;
 import com.example.acckeep.objects.Credentials;
 import com.example.acckeep.objects.Website;
@@ -83,11 +84,11 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(listView.getItemAtPosition(position) instanceof Website) {
                     Website edit = (Website) listView.getItemAtPosition(position);
-                    Log.i("clicked", edit.toString());
+                    openEditActivity(edit);
                 }
                 else {
                     Application edit = (Application) listView.getItemAtPosition(position);
-                    Log.i("clicked", edit.toString());
+                    openEditActivity(edit);
                 }
             }
         });
@@ -99,11 +100,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-//    public void openEditActivity(Credentials edit) {
-//        Intent intent = new Intent(this, Edit_Program.class);
-//        intent.putExtra("Object", edit);
-//        startActivity(intent);
-//    }
+    public void openEditActivity(Credentials edit) {
+        Intent intent = new Intent(this, Edit_Program.class);
+        intent.putExtra("Object", edit);
+        startActivity(intent);
+    }
 
 //    public void openSearchActivity() {
 //        Intent intent = new Intent(this, Search.class);
