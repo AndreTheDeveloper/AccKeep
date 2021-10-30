@@ -37,6 +37,7 @@ public class Edit_Program extends AppCompatActivity {
     private Website website;
     private Application app;
     private Credentials object;
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +50,9 @@ public class Edit_Program extends AppCompatActivity {
         super.onStart();
     }
     private void editView() {
-        Intent i = getIntent();
-        if(i.getSerializableExtra("Object") instanceof Website) {
-            website = (Website) i.getSerializableExtra("Object");
+        intent = getIntent();
+        if(intent.getSerializableExtra("Object") instanceof Website) {
+            website = (Website) intent.getSerializableExtra("Object");
             setContentView(R.layout.edit);
             EditText editApp = (EditText) findViewById(R.id.editApplication);
             editApp.setText(website.getWebsite());
@@ -60,7 +61,7 @@ public class Edit_Program extends AppCompatActivity {
             EditText editPass = (EditText) findViewById(R.id.editPassword);
             editPass.setText(website.getPassword());
         } else {
-            app = (Application) i.getSerializableExtra("Object");
+            app = (Application) intent.getSerializableExtra("Object");
             setContentView(R.layout.edit);
             EditText editApp = (EditText) findViewById(R.id.editApplication);
             editApp.setText(app.getApp());
@@ -83,7 +84,7 @@ public class Edit_Program extends AppCompatActivity {
         finish();
     }
 
-    private void save(ArrayList<Credentials> allObjects) {
+    private void saveToFile(ArrayList<Credentials> allObjects) {
         Context context = this;
         try{
             fileOut = context.openFileOutput("saved.ser", Context.MODE_PRIVATE);
@@ -98,19 +99,22 @@ public class Edit_Program extends AppCompatActivity {
 
     public void saveEdit(View v) {
         View application = findViewById(R.id.editApplication);
-        TextView appView = (TextView) application;
-        String updatedApp = appView.getText().toString();
+            TextView appView = (TextView) application;
+                String updatedApp = appView.getText().toString();
+
         View username = findViewById(R.id.editUsername);
-        TextView usrView = (TextView) username;
-        String updatedUsr = usrView.getText().toString();
+            TextView usrView = (TextView) username;
+                String updatedUsr = usrView.getText().toString();
+
         View password = findViewById(R.id.editPassword);
-        TextView passView = (TextView) password;
-        String updatedPass = passView.getText().toString();
+            TextView passView = (TextView) password;
+                String updatedPass = passView.getText().toString();
 
         if(updatedApp.length() > 0 && updatedUsr.length() > 0 && updatedPass.length() > 0) {
-            for (int i = 0; i < allObjects.size(); i ++) {
-                if(allObjects.get(i) instanceof Website) {
+            for (int i = 0; i < allObjects.size(); i++) {
+                if(allObjects.get(i) instanceof Website && intent.getSerializableExtra("Object") instanceof Website) {
                     Website current = (Website) allObjects.get(i);
+                    website = (Website) intent.getSerializableExtra("Object");
                     if (current.getUsername().equals(website.getUsername()) &&
                             current.getWebsite().equals(website.getWebsite()) &&
                             current.getPassword().equals(website.getPassword())) {
@@ -120,8 +124,9 @@ public class Edit_Program extends AppCompatActivity {
                         allObjects.remove(i);
                         allObjects.add(i, website);
                     }
-                } else if (allObjects.get(i) instanceof Application){
+                } else if (allObjects.get(i) instanceof Application && intent.getSerializableExtra("Object") instanceof Application){
                     Application current = (Application) allObjects.get(i);
+                    app = (Application) intent.getSerializableExtra("Object");
                     if (current.getUsername().equals(app.getUsername()) &&
                             current.getApp().equals(app.getApp()) &&
                             current.getPassword().equals(app.getPassword())) {
@@ -133,7 +138,7 @@ public class Edit_Program extends AppCompatActivity {
                     }
                 }
             }
-            save(allObjects);
+            saveToFile(allObjects);
             Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
