@@ -28,6 +28,7 @@
         </activity>
         <activity android:name=".functionality.Search"></activity>
         <activity android:name=".customlist.MainActivity"></activity>
+        <activity android:name=".functionality.Settings"></activity>
     </application>
 
 </manifest>

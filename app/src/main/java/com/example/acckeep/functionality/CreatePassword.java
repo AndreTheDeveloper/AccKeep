@@ -25,7 +25,11 @@ public class CreatePassword extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_password);
+        deleteFile();
+    }
 
+    public void deleteFile() {
+        deleteFile("password.ser");
     }
 
     public void selectButton(View v) {

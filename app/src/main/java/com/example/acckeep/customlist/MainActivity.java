@@ -18,6 +18,7 @@ import com.example.acckeep.functionality.Add_new;
 //import com.example.acckeep.functionality.Search;
 import com.example.acckeep.functionality.Edit_Program;
 import com.example.acckeep.functionality.Search;
+import com.example.acckeep.functionality.Settings;
 import com.example.acckeep.objects.Application;
 import com.example.acckeep.objects.Account;
 import com.example.acckeep.objects.Website;
@@ -109,7 +110,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openSettings(View v) {
-
+        Intent intent = new Intent(this, Settings.class);
+        startActivity(intent);
     }
 
     private ArrayList<Account> load(){
