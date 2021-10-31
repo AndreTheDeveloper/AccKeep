@@ -63,6 +63,7 @@ public class Settings extends AppCompatActivity {
     }
 
     public void changePassword(View v) {
+        deleteFile("password.ser");
         Intent intent = new Intent(this, CreatePassword.class);
         startActivity(intent);
     }
@@ -70,7 +71,7 @@ public class Settings extends AppCompatActivity {
     public void deleteEverything(View v) {
         new AlertDialog.Builder(this)
                 .setTitle("Confirm deletion of everything")
-                .setMessage("Do you really want to delete all saved accounts?There is no recovery upon deletion")
+                .setMessage("Do you really want to delete all saved accounts? There is no recovery upon deletion")
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 

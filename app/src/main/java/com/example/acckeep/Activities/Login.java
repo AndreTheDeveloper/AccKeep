@@ -32,17 +32,17 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
+        password = loadPassword();
+        if(password == null) {
+            Intent intent = new Intent(this, CreatePassword.class);
+            startActivity(intent);
+        }
 
         sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         checkNightModeActivated();
     }
 
     public void onStart() {
-        password = loadPassword();
-        if(password == null) {
-            Intent intent = new Intent(this, CreatePassword.class);
-            startActivity(intent);
-        }
         super.onStart();
     }
 

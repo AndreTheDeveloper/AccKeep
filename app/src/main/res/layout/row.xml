@@ -15,7 +15,7 @@
     </ImageView>
 
     <LinearLayout
-        android:layout_width="232dp"
+        android:layout_width="213dp"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
@@ -32,9 +32,7 @@
         android:id="@+id/editBttn"
         android:layout_width="42dp"
         android:layout_height="42dp"
-        android:src="@drawable/settingsicondark"
         android:layout_marginTop="10dp"
-        >
-    </ImageView>
+        android:src="@drawable/settingsicondark"></ImageView>
 
 </LinearLayout>

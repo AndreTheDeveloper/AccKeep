@@ -1,6 +1,7 @@
 package com.example.acckeep.Activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -23,11 +24,6 @@ public class CreatePassword extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_password);
-        deleteFile();
-    }
-
-    public void deleteFile() {
-        deleteFile("password.ser");
     }
 
     public void selectButton(View v) {
@@ -51,6 +47,9 @@ public class CreatePassword extends AppCompatActivity {
         else if(password.length() < 1) {
             Toast.makeText(this, "Password field is empty", Toast.LENGTH_SHORT).show();
         }
+
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
     public void backSpace(View v) {
