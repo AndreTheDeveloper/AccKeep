@@ -21,7 +21,6 @@ import java.util.ArrayList;
 public class MyAdapter extends ArrayAdapter<Account> {
     private Context mContext;
     private int mResource;
-    public static final String MyPREFERENCES = "nightModePrefs";
     public static final String KEY_ISNIGHTMODE = "isNightMode";
     SharedPreferences sharedPreferences;
 

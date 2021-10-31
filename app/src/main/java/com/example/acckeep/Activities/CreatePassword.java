@@ -1,8 +1,7 @@
-package com.example.acckeep.functionality;
+package com.example.acckeep.Activities;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -15,7 +14,6 @@ import com.example.acckeep.R;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
-import java.nio.charset.StandardCharsets;
 
 public class CreatePassword extends AppCompatActivity {
 

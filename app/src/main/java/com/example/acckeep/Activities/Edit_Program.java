@@ -1,8 +1,9 @@
-package com.example.acckeep.functionality;
+package com.example.acckeep.Activities;
 
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -12,8 +13,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.acckeep.customlist.MainActivity;
 import com.example.acckeep.R;
+import com.example.acckeep.backend.Load;
+import com.example.acckeep.backend.Save;
 import com.example.acckeep.objects.Application;
 import com.example.acckeep.objects.Account;
 import com.example.acckeep.objects.Website;
@@ -27,23 +29,23 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 public class Edit_Program extends AppCompatActivity {
-    private FileOutputStream fileOut;
-    private ObjectOutputStream out;
-    private FileInputStream fileIn;
-    private ObjectInputStream in;
     private ArrayList<Account> allObjects = new ArrayList<>();
-    private Account object;
     private Website website;
     private Application app;
     private Intent intent;
+    Context context;
+    public static final String MyPREFERENCES = "nightModePrefs";
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit);
+        context = this;
+        sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
     }
     public void onStart() {
-        load();
+        Load.load(allObjects,this,sharedPreferences);
         editView();
         super.onStart();
     }
@@ -94,18 +96,6 @@ public class Edit_Program extends AppCompatActivity {
         finish();
     }
 
-    private void saveToFile(ArrayList<Account> allObjects) {
-        Context context = this;
-        try{
-            fileOut = context.openFileOutput("saved.ser", Context.MODE_PRIVATE);
-            out = new ObjectOutputStream(fileOut);
-            for(int i = 0; i < allObjects.size(); i++){
-                this.out.writeObject(allObjects.get(i));
-            }
-        } catch(Exception e) {
-            Toast.makeText(this, "Error saving", Toast.LENGTH_SHORT).show();
-        }
-    }
 
     public void saveEdit(View v) {
         View application = findViewById(R.id.editApplication);
@@ -148,7 +138,7 @@ public class Edit_Program extends AppCompatActivity {
                     }
                 }
             }
-            saveToFile(allObjects);
+            Save.save(allObjects, this);
             Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
@@ -186,27 +176,9 @@ public class Edit_Program extends AppCompatActivity {
                                 }
                             }
                         }
-                        saveToFile(allObjects);
+                        Save.save(allObjects, context);
                     }})
                 .setNegativeButton(android.R.string.no, null).show();
     }
 
-    private ArrayList<Account> load(){
-        allObjects.clear();
-        boolean loop = true;
-        Context context = this;
-        try{
-            fileIn =  context.openFileInput("saved.ser");
-            in = new ObjectInputStream(fileIn);
-            while(loop) {
-                object = (Account) in.readObject();
-                if(object != null) {
-                    allObjects.add(object);
-                } else {
-                    loop = false;
-                }
-            }
-        } catch(IOException | ClassNotFoundException e){}
-        return allObjects;
-    }
 }

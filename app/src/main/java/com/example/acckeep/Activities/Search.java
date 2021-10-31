@@ -1,4 +1,4 @@
-package com.example.acckeep.functionality;
+package com.example.acckeep.Activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,8 +14,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.acckeep.customlist.MainActivity;
 import com.example.acckeep.R;
+import com.example.acckeep.backend.Load;
 import com.example.acckeep.customlist.MyAdapter;
 import com.example.acckeep.objects.Account;
 import com.example.acckeep.objects.Application;
@@ -32,10 +32,7 @@ public class Search extends AppCompatActivity {
 
     private ArrayList<Account> allObjects = new ArrayList<>();
     private ArrayList<Account> search = new ArrayList<>();
-    private Account object;
     private ListView searchResult;
-    private FileInputStream fileIn;
-    private ObjectInputStream in;
     public static final String MyPREFERENCES = "nightModePrefs";
     SharedPreferences sharedPreferences;
 
@@ -93,7 +90,7 @@ public class Search extends AppCompatActivity {
                         finish();
                     }
                 });
-                allObjects = load();
+                allObjects = Load.load(allObjects, this, sharedPreferences);
                 for(int i = 0; i < allObjects.size(); i++) {
                     if (allObjects.get(i) instanceof Website) {
                         Website current = (Website) allObjects.get(i);
@@ -133,24 +130,6 @@ public class Search extends AppCompatActivity {
         } else {
             Toast.makeText(this, "One or more search fields are empty", Toast.LENGTH_SHORT).show();
         }
-    }
-    private ArrayList<Account> load(){
-        allObjects.clear();
-        boolean loop = true;
-        Context context = this;
-        try{
-            fileIn =  context.openFileInput("saved.ser");
-            in = new ObjectInputStream(fileIn);
-            while(loop) {
-                object = (Account) in.readObject();
-                if(object != null) {
-                    allObjects.add(object);
-                } else {
-                    loop = false;
-                }
-            }
-        } catch(IOException | ClassNotFoundException e){}
-        return allObjects;
     }
 
     public void openEditActivity(Account edit) {

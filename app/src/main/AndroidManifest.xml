@@ -9,16 +9,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".functionality.Add_new"
-            android:parentActivityName=".customlist.MainActivity" />
+            android:name=".Activities.Add_new"
+            android:parentActivityName=".Activities.MainActivity" />
         <activity
-            android:name=".functionality.Edit_Program"
-            android:parentActivityName=".customlist.MainActivity" />
+            android:name=".Activities.Edit_Program"
+            android:parentActivityName=".Activities.MainActivity" />
         <activity
-            android:name=".functionality.CreatePassword"
-            android:parentActivityName=".customlist.MainActivity" />
+            android:name=".Activities.CreatePassword"
+            android:parentActivityName=".Activities.MainActivity" />
         <activity
-            android:name=".functionality.Login"
+            android:name=".Activities.Login"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,9 +26,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".functionality.Search"></activity>
-        <activity android:name=".customlist.MainActivity"></activity>
-        <activity android:name=".functionality.Settings"></activity>
+        <activity android:name=".Activities.Search"></activity>
+        <activity android:name=".Activities.MainActivity"></activity>
+        <activity android:name=".Activities.Settings"></activity>
     </application>
 
 </manifest>

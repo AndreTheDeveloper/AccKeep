@@ -1,10 +1,9 @@
-package com.example.acckeep.functionality;
+package com.example.acckeep.Activities;
 
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.wifi.hotspot2.pps.Credential;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Switch;
