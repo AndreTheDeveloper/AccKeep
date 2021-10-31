@@ -127,7 +127,7 @@ public class Search extends AppCompatActivity {
 
 
         } else {
-            Toast.makeText(this, "One or more search fields are empty", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "One or more search fields are empty", Toast.LENGTH_SHORT).show();
         }
     }
     private ArrayList<Account> load(){

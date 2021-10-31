@@ -108,6 +108,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void openSettings(View v) {
+
+    }
+
     private ArrayList<Account> load(){
         allObjects.clear();
         boolean loop = true;

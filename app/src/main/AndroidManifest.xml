@@ -1,34 +1,33 @@
-<?xml version="1.0" encoding="UTF-8"?>
-    <manifest package="com.example.acckeep"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.acckeep">
+
     <application
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+        android:allowBackup="true"
+        android:icon="@drawable/logo"
+        android:label="AccKeep"
         android:supportsRtl="true"
-        android:label="Secure Account Manager"
-        android:allowBackup="true">
-    <activity
-        android:parentActivityName=".customlist.MainActivity"
-        android:name=".functionality.Add_new"/>
-    <activity
-        android:parentActivityName=".customlist.MainActivity"
-        android:name=".functionality.Edit_Program"/>
-    <activity
-        android:parentActivityName=".customlist.MainActivity"
-        android:name=".functionality.CreatePassword"/>
-    <activity android:name=".functionality.Login"
-        android:exported="true">
-    <intent-filter>
-    <action
-        android:name="android.intent.action.MAIN"/>
-    <category
-        android:name="android.intent.category.LAUNCHER"/>
-    </intent-filter>
-    </activity>
-    <activity
-        android:name=".functionality.Search">
-    </activity>
-    <activity
-        android:name=".customlist.MainActivity">
-    </activity>
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".functionality.Add_new"
+            android:parentActivityName=".customlist.MainActivity" />
+        <activity
+            android:name=".functionality.Edit_Program"
+            android:parentActivityName=".customlist.MainActivity" />
+        <activity
+            android:name=".functionality.CreatePassword"
+            android:parentActivityName=".customlist.MainActivity" />
+        <activity
+            android:name=".functionality.Login"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".functionality.Search"></activity>
+        <activity android:name=".customlist.MainActivity"></activity>
     </application>
+
 </manifest>
