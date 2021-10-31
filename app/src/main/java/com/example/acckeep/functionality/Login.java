@@ -2,12 +2,14 @@ package com.example.acckeep.functionality;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import com.example.acckeep.customlist.MainActivity;
 import com.example.acckeep.R;
@@ -23,11 +25,17 @@ public class Login extends AppCompatActivity {
     private String password;
     private String guess = "";
     private TextView guessedPass;
+    public static final String MyPREFERENCES = "nightModePrefs";
+    public static final String KEY_ISNIGHTMODE = "isNightMode";
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
+
+        sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        checkNightModeActivated();
     }
 
     public void onStart() {
@@ -37,6 +45,14 @@ public class Login extends AppCompatActivity {
             startActivity(intent);
         }
         super.onStart();
+    }
+
+    public void checkNightModeActivated() {
+        if(sharedPreferences.getBoolean(KEY_ISNIGHTMODE, false)) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
     }
 
     public String loadPassword() {

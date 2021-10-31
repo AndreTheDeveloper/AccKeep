@@ -3,32 +3,64 @@ package com.example.acckeep.functionality;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.wifi.hotspot2.pps.Credential;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Switch;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import com.example.acckeep.R;
-import com.example.acckeep.objects.Account;
-import com.example.acckeep.objects.Application;
-import com.example.acckeep.objects.Website;
-
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.ArrayList;
 
 public class Settings extends AppCompatActivity {
+
+    private Switch aSwitch;
+    public static final String MyPREFERENCES = "nightModePrefs";
+    public static final String KEY_ISNIGHTMODE = "isNightMode";
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings);
+
+        aSwitch = findViewById(R.id.themeSwitch);
+        sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        checkNightModeActivated();
+
+        aSwitch.setOnCheckedChangeListener(((buttonView, isChecked) -> {
+            if(isChecked) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                saveNightModeState(true);
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                saveNightModeState(false);
+            }
+            recreate();
+        }
+               ));
+    }
+
+    private void saveNightModeState(boolean nightMode) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putBoolean(KEY_ISNIGHTMODE, nightMode);
+
+        editor.apply();
+    }
+
+    public void checkNightModeActivated() {
+        if(sharedPreferences.getBoolean(KEY_ISNIGHTMODE, false)) {
+            aSwitch.setChecked(true);
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            aSwitch.setChecked(false);
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
     }
 
     public void changePassword(View v) {
