@@ -15,7 +15,6 @@ import com.example.acckeep.objects.Account;
 import com.example.acckeep.objects.Website;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -59,7 +58,7 @@ public class Add_new extends AppCompatActivity {
             allObjects = load();
             Switch sw = (Switch) findViewById(R.id.switch1);
             if(sw.isChecked()) {
-                Application ap = new Application(app,R.drawable.appicon,usr,pass);
+                Application ap = new Application(app,R.drawable.appicondark,usr,pass);
                 if(appValidation(ap)) {
                     allObjects.add(ap);
                     save(allObjects);
@@ -67,7 +66,7 @@ public class Add_new extends AppCompatActivity {
                 }
             }
             else {
-                Website web = new Website(app,R.drawable.websiteicon,usr,pass);
+                Website web = new Website(app,R.drawable.websiteicondark,usr,pass);
                 if(webValidation(web)) {
                     allObjects.add(web);
                     save(allObjects);

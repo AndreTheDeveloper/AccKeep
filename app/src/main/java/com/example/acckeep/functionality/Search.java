@@ -2,6 +2,7 @@ package com.example.acckeep.functionality;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -35,6 +36,8 @@ public class Search extends AppCompatActivity {
     private ListView searchResult;
     private FileInputStream fileIn;
     private ObjectInputStream in;
+    public static final String MyPREFERENCES = "nightModePrefs";
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +50,7 @@ public class Search extends AppCompatActivity {
                 finish();
             }
         });
+        sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
     }
 
     public void onStart() {
@@ -108,7 +112,7 @@ public class Search extends AppCompatActivity {
                     }
                 }
                 searchResult = (ListView)findViewById(R.id.searchList);
-                MyAdapter adapter = new MyAdapter(this, R.layout.row, search);
+                MyAdapter adapter = new MyAdapter(this, R.layout.row, search, sharedPreferences);
                 searchResult.setAdapter(adapter);
 
                 searchResult.setOnItemClickListener(new AdapterView.OnItemClickListener() {

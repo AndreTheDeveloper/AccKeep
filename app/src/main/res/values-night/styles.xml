@@ -4,6 +4,7 @@
         <item name="colorPrimary">@color/colorPrimaryNight</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDarkNight</item>
         <item name="colorAccent">@color/teal_700</item>
+        <item name="android:textColor">@color/white</item>
 
         <item name="android:windowBackground">@color/colorPrimaryNight</item>
     </style>

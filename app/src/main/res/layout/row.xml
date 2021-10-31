@@ -25,7 +25,6 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="20dp"
             android:text="toString"
-            android:textColor="#000"
             android:textSize="18sp"></TextView>
     </LinearLayout>
 
@@ -33,7 +32,7 @@
         android:id="@+id/editBttn"
         android:layout_width="42dp"
         android:layout_height="42dp"
-        android:src="@drawable/settingsicon"
+        android:src="@drawable/settingsicondark"
         android:layout_marginTop="10dp"
         >
     </ImageView>

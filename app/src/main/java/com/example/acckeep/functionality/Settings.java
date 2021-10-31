@@ -81,4 +81,8 @@ public class Settings extends AppCompatActivity {
                 .setNegativeButton(android.R.string.no, null).show();
     }
 
+    public void backToMain(View v) {
+        finish();
+    }
+
 }

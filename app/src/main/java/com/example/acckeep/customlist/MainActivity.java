@@ -1,14 +1,18 @@
 package com.example.acckeep.customlist;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Bundle;
 
 import android.view.View;
 import android.widget.AdapterView;
 
+import android.widget.ImageView;
 import android.widget.ListView;
 
 
@@ -37,6 +41,10 @@ public class MainActivity extends AppCompatActivity {
     private FileInputStream fileIn;
     private ObjectInputStream in;
     private ListView listView;
+    private ImageView editImg;
+    public static final String MyPREFERENCES = "nightModePrefs";
+    public static final String KEY_ISNIGHTMODE = "isNightMode";
+    SharedPreferences sharedPreferences;
 
 
     @Override
@@ -44,7 +52,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         FloatingActionButton addBttn = (FloatingActionButton) findViewById(R.id.addBttn);
+
         addBttn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,9 +82,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void createList() {
         allObjects = load();
-        listView = (ListView)findViewById(R.id.ListView);
+        listView = findViewById(R.id.ListView);
 
-        MyAdapter adapter = new MyAdapter(this, R.layout.row, allObjects);
+        MyAdapter adapter = new MyAdapter(this, R.layout.row, allObjects, sharedPreferences);
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -124,6 +134,21 @@ public class MainActivity extends AppCompatActivity {
             while(loop) {
                 object = (Account) in.readObject();
                 if(object != null) {
+                    if(sharedPreferences.getBoolean(KEY_ISNIGHTMODE, false)) {
+                        if(object instanceof Application) {
+                            object.setImage(R.drawable.appiconlight);
+                        }
+                        else {
+                            object.setImage(R.drawable.websiteiconlight);
+                        }
+                    } else {
+                        if(object instanceof Application) {
+                            object.setImage(R.drawable.appicondark);
+                        }
+                        else {
+                            object.setImage(R.drawable.websiteicondark);
+                        }
+                    }
                     allObjects.add(object);
                 } else {
                     loop = false;
